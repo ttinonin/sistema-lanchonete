@@ -1,0 +1,60 @@
+-- Habilitar suporte a chaves estrangeiras
+PRAGMA foreign_keys = ON;
+
+-- Tabela de clientes
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY,
+    nome TEXT,
+    telefone TEXT,
+    endereco TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela de funcionarios
+CREATE TABLE funcionarios (
+    id INTEGER PRIMARY KEY,
+    email TEXT,
+    nome TEXT,
+    senha TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela de lanches
+CREATE TABLE lanches (
+    id INTEGER PRIMARY KEY,
+    nome TEXT,
+    preco DECIMAL(10,2),
+    descricao TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela de bebidas
+CREATE TABLE bebidas (
+    id INTEGER PRIMARY KEY,
+    nome TEXT,
+    preco DECIMAL(10,2),
+    litragem INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela de pedidos
+CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY,
+    cliente_id INTEGER NOT NULL,
+    funcionario_id INTEGER NOT NULL,
+    valor DECIMAL(10,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (funcionario_id) REFERENCES funcionarios(id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- Tabela de itens do pedido
+CREATE TABLE pedido_items (
+    pedido_id INTEGER NOT NULL,
+    lanche_id INTEGER,
+    bebida_id INTEGER,
+    PRIMARY KEY (pedido_id, lanche_id, bebida_id),
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (lanche_id) REFERENCES lanches(id) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (bebida_id) REFERENCES bebidas(id) ON DELETE SET NULL ON UPDATE CASCADE
+);
