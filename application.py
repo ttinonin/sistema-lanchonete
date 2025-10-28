@@ -10,6 +10,7 @@ class Application:
     
     def prod(self):
         self.app = Flask(__name__)
+        self.app.secret_key = "prod"
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///lanchonete.db'
         self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -20,10 +21,12 @@ class Application:
 
     def test(self):
         self.app = Flask(__name__)
+        self.app.secret_key = "test"
+        self.app.config["DEBUG"] = True
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
         self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
         db.init_app(self.app)
 
     def run(self):
-        pass
+        self.app.run(debug=True)
