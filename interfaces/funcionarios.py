@@ -32,7 +32,7 @@ class IFuncionariosRepository(ABC):
             O funcionário solicitado se existir o ID.
 
         Raises:
-            ValueError se o ID não existir.
+            UnmappedInstanceError se o ID não existir.
         """
         pass
 
@@ -51,6 +51,9 @@ class IFuncionariosRepository(ABC):
         """
         Atualiza campos de um funcionario especifico.
 
+        Parameters:
+            funcionario: Funcionario a ser atualizado
+
         Returns:
             Funcionario atualizado.
         """
@@ -61,10 +64,13 @@ class IFuncionariosRepository(ABC):
         """
         Deleta um funcionario especifico.
 
+        Parameters:
+            id: id do funcionario a ser deletado
+
         Returns:
             Funcionario deletado.
 
         Raises:
-            ValueError se o ID não existir.
+            UnmappedInstanceError se o ID não existir.
         """
         pass
