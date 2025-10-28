@@ -10,4 +10,4 @@ class Cliente(db.Model):
     telefone = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
-    pedido_items = db.relationship('PedidoItem', back_populates='bebida')
+    pedidos = db.relationship("Pedido", back_populates="cliente", cascade="all, delete")

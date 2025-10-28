@@ -8,7 +8,7 @@ class IFuncionariosRepository(ABC):
     Define operações essenciais de CRUD que devem ser implementadas.
     """
     @abstractmethod
-    def criar(funcionario: Funcionario) -> Funcionario:
+    def criar(self, funcionario: Funcionario) -> Funcionario:
         """
         Adiciona um novo funcionário ao repositório.
 
@@ -21,7 +21,7 @@ class IFuncionariosRepository(ABC):
         pass
 
     @abstractmethod
-    def buscar_por_id(id) -> Funcionario:
+    def buscar_por_id(self, id) -> Funcionario:
         """
         Retorna o funcionário correspondente ao ID informado.
 
@@ -37,7 +37,7 @@ class IFuncionariosRepository(ABC):
         pass
 
     @abstractmethod
-    def listar():
+    def listar(self):
         """
         Retorna todos os funcionarios.
 
@@ -47,7 +47,7 @@ class IFuncionariosRepository(ABC):
         pass
 
     @abstractmethod
-    def atualizar(funcionario: Funcionario) -> Funcionario:
+    def atualizar(self, funcionario: Funcionario) -> Funcionario:
         """
         Atualiza campos de um funcionario especifico.
 
@@ -57,7 +57,7 @@ class IFuncionariosRepository(ABC):
         pass
 
     @abstractmethod
-    def deletar(id) -> Funcionario:
+    def deletar(self, id) -> Funcionario:
         """
         Deleta um funcionario especifico.
 
