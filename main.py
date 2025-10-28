@@ -1,6 +1,6 @@
 from application import Application
 from controller.funcionario_controller import FuncionarioController
-from flask import render_template, request, redirect, url_for, jsonify, flash
+from flask import render_template, request, redirect, jsonify, flash
 
 app = Application("prod")
 funcionario_controller = FuncionarioController()
@@ -19,20 +19,20 @@ def funcionarios():
 
         try:
             funcionario_controller.criar(nome, email, senha, senha_confirm)
-            return redirect(url_for("funcionarios"))
+            return redirect("/funcionarios")
         except ValueError as error:
             flash(str(error), "error")
-            return redirect("/criar-funcionario")
-        
+            return redirect("/criar-funcionario")    
     elif request.method == "GET":
         funcionarios_l = funcionario_controller.listar()
-
-        funcionarios_dict = [
-            {"id": f.id, "nome": f.nome, "email": f.email, "senha": f.senha, "created_at": f.created_at.isoformat()}
-            for f in funcionarios_l
-        ]
     
-    return jsonify(funcionarios_dict)
+        return render_template("funcionario-listar.html", funcionarios=funcionarios_l)
+
+@app.app.route("/deletar-funcionario", methods=["POST"])
+def deletar_usuario():
+    funcionario_id = request.form["funcionario_id"]
+    funcionario_controller.deletar(funcionario_id)
+    return redirect("/funcionarios")
 
 if __name__ == "__main__":
     app.run()

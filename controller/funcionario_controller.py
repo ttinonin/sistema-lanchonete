@@ -20,3 +20,6 @@ class FuncionarioController:
 
     def listar(self):
         return self.repo.listar()
+    
+    def deletar(self, id: int):
+        return self.repo.deletar(id)
