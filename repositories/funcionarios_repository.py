@@ -8,6 +8,9 @@ class FuncionariosRepository(IFuncionariosRepository):
         db.session.commit()
         return funcionario
 
+    def buscar_por_email(self, email) -> Funcionario:
+        return db.session.query(Funcionario).filter_by(email=email).first()
+
     def buscar_por_id(self, id) -> Funcionario:
         return db.session.get(Funcionario, id)
     

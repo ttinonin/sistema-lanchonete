@@ -1,18 +1,19 @@
 {% extends "layout.html" %}
 {% block conteudo %}
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Funcionarios</h2>
-        <a href="/criar-funcionario"><button class="btn btn-success">Adicionar</button></a>
+        <h2>Bebidas</h2>
+            <a href="/criar-bebida"><button class="btn btn-success">Adicionar</button></a>
     </div>
-    {% for funcionario in funcionarios %}
+    {% for bebida in bebidas %}
     <div class="d-flex p-3 border rounded-2 justify-content-between align-items-center mb-3">
         <div class="">
-            <h3>{{ funcionario.nome }}</h3>
-            <p>Email: {{ funcionario.email }}</p>
+            <h3>{{ bebida.nome }}</h3>
+            <p>Preço: R${{ bebida.preco }}</p>
+            <p>Litragem: {{ bebida.litragem }}</p>
         </div>
         <div class="d-flex flex-column">
-            <form action="/deletar-funcionario" method="POST">
-                <input type="hidden" name="funcionario_id" value={{funcionario.id}}>
+            <form action="/deletar-bebida" method="POST">
+                <input type="hidden" name="bebida_id" value={{bebida.id}}>
                 <button type="submit" class="btn btn-danger">Deletar</button>
             </form>
             <a href="/criar-bebida"><button class="btn btn-warning mt-2 w-100">Editar</button></a>

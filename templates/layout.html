@@ -23,6 +23,12 @@
                 <a href="/bebidas" class="list-group-item list-group-item-action">Bebidas</a>
                 <a href="/pedidos" class="list-group-item list-group-item-action">Pedidos</a>
             </div>
+
+            {% if session.usuario_id %}
+                <a href="/logout"><button class="btn btn-danger mt-3 w-100">Sair</button></a>
+            {% else %}
+                <a href="/login"><button class="btn btn-success mt-3 w-100">Entrar</button></a>
+            {% endif %}
         </div>
         <div class="p-3 rounded-3" style="background-color: white; width: 80%; box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);">
             {% with messages = get_flashed_messages(with_categories=true) %}

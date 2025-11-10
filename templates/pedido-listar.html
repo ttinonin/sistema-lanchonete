@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block conteudo %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Pedidos</h2>
+        <a href="/criar-pedido"><button class="btn btn-success">Adicionar</button></a>
+    </div>
+    {% for pedido in pedidos %}
+    <a href="/pedidos/{{pedido.id}}" style="text-decoration: none; color: inherit">
+    <div class="d-flex p-3 border rounded-2 justify-content-between align-items-center mb-3">
+        <div class="">
+            <h3>Pedido Nº{{ pedido.id }}</h3>
+            <p>Valor: R${{ pedido.valor }}</p>
+            <p>Cliente: {{ pedido.cliente.nome }}</p>
+            <p>Emitido por: {{ pedido.funcionario.nome }}</p>
+        </div>
+        <div class="d-flex flex-column">
+            <form action="/deletar-pedido" method="POST">
+                <input type="hidden" name="pedido_id" value={{pedido.id}}>
+                <button type="submit" class="btn btn-danger">Deletar</button>
+            </form>
+            <a href="/criar-bebida"><button class="btn btn-warning mt-2 w-100">Editar</button></a>
+            
+        </div>
+    </div>
+</a>
+    {% endfor %}
+{% endblock %}

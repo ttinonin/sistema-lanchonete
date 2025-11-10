@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block conteudo %}
+<form action="/bebidas" method="POST">
+    <h2>Criar bebida</h2>
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite o nome" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label for="preco" class="form-label">Preço</label>
+        <input type="text" id="preco" name="preco" placeholder="Digite o preço" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label for="litragem" class="form-label">Litragem</label>
+        <input type="text" id="litragem" name="litragem" placeholder="Digite a litragem" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-success">Criar</button>
+</form>
+{% endblock %}

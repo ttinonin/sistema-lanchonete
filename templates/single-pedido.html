@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block conteudo %}
+    <h2>Pedido Nº{{ pedido.id }}</h2>
+    <p>Valor: R${{ pedido.valor }}</p>
+    <p>Cliente: {{ pedido.cliente.nome }}</p>
+    <p>Emitido por: {{ pedido.funcionario.nome }}</p>
+
+    <h3>Items do pedido:</h3>
+    {% for item in items %}
+        <p>{{ item.lanche.nome }}</p>
+        <p>{{ item.bebida.nome }}</p>
+    {% endfor %}
+{% endblock %}

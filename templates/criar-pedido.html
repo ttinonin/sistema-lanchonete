@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block conteudo %}
+<form action="/pedidos" method="POST">
+    <h2>Criar pedido</h2>
+
+    <div class="mb-3">
+        <label for="cliente_id" class="form-label">Cliente</label>
+        <select id="cliente_id" name="cliente_id" class="form-select">
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="lanche_id" class="form-label">Lanches</label>
+        <div class="d-flex align-items-center">
+            <select id="lanche_id" class="form-select">
+                {% for lanche in lanches %}
+                    <option value="{{ lanche.id }}">{{ lanche.nome }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" id="addLanche" class="btn btn-primary mt-2">Adicionar</button>
+        </div>
+    </div>
+
+    <div id="itens-lista" class="mb-3">
+        <h4>Lanches adicionados:</h4>
+        <ul id="lista-itens">
+            <!-- Lista de itens será preenchida aqui -->
+        </ul>
+    </div>
+
+    <div class="mb-3">
+        <label for="bebida_id" class="form-label">Bebidas</label>
+        <div class="d-flex align-items-center">
+            <select id="bebida_id" class="form-select">
+                {% for bebida in bebidas %}
+                    <option value="{{ bebida.id }}">{{ bebida.nome }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" id="addBebida" class="btn btn-primary mt-2">Adicionar</button>
+        </div>
+    </div>
+
+    <div id="itens-lista" class="mb-3">
+        <h4>Bebidas adicionadas:</h4>
+        <ul id="bebida-itens">
+            <!-- Lista de itens será preenchida aqui -->
+        </ul>
+    </div>
+
+    <button type="submit" class="btn btn-success">Criar</button>
+</form>
+
+<script>
+    document.getElementById('addLanche').addEventListener('click', function() {
+        var lancheSelect = document.getElementById('lanche_id');
+        var lancheId = lancheSelect.value;
+        var lancheNome = lancheSelect.options[lancheSelect.selectedIndex].text;
+
+        // Criar o item na lista
+        var listItem = document.createElement('li');
+        listItem.textContent = lancheNome;
+
+        // Adicionar à lista de itens
+        document.getElementById('lista-itens').appendChild(listItem);
+
+        // Opcional: Adicionar o lanche ao campo de dados que será enviado no form (se precisar)
+        var inputHidden = document.createElement('input');
+        inputHidden.type = 'hidden';
+        inputHidden.name = 'lanches[]';  // O nome do campo será um array
+        inputHidden.value = lancheId;
+
+        document.forms[0].appendChild(inputHidden); // Adiciona o input ao formulário
+    });
+
+    document.getElementById('addBebida').addEventListener('click', function() {
+        var lancheSelect = document.getElementById('bebida_id');
+        var lancheId = lancheSelect.value;
+        var lancheNome = lancheSelect.options[lancheSelect.selectedIndex].text;
+
+        // Criar o item na lista
+        var listItem = document.createElement('li');
+        listItem.textContent = lancheNome;
+
+        // Adicionar à lista de itens
+        document.getElementById('bebida-itens').appendChild(listItem);
+
+        // Opcional: Adicionar o lanche ao campo de dados que será enviado no form (se precisar)
+        var inputHidden = document.createElement('input');
+        inputHidden.type = 'hidden';
+        inputHidden.name = 'bebidas[]';  // O nome do campo será um array
+        inputHidden.value = lancheId;
+
+        document.forms[0].appendChild(inputHidden); // Adiciona o input ao formulário
+    });
+</script>
+{% endblock %}
