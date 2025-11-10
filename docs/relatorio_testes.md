@@ -37,3 +37,7 @@ Todos os testes executados foram aprovados
 | Calcular pedido sem desconto      |   Aprovado    | O valor permanece o mesmo sem aplicar o desconto |
 | Calcular taxa de entrega gratis   |  Aprovado    | Valor da taxa esta zerado |
 | Calcular tempo estimado para entrega   | Aprovado | O tempo para entrega varia conforme o valor do pedido |
+
+## Conclusão
+
+A realização dos testes mostrou-se essencial para prevenir erros em produção, resultando em uma cobertura total de 80%.
